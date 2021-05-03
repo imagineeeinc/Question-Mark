@@ -62,11 +62,13 @@ function createTray() {
           }
       }
   ]);
+  /*
 var AppLaunch = new AutoLaunch({
   name: 'Question Mark',
   path: '/Applications/Minecraft.app',
 })
 AppLaunch.enable()
+*/
   appIcon.on('double-click', function (event) {
       mainWindow.show();
   });
