@@ -2,7 +2,7 @@
   "name": "question-mark",
   "version": "1.0.0",
   "description": "Question Mark can help you quickly find apps, documents and other files on your computer and also do online searches",
-  "main": "src/application.js",
+  "main": "application.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",

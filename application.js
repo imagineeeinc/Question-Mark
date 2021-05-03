@@ -9,7 +9,7 @@ let mainWindow
 function createWindow () {
   const win = new BrowserWindow({
     //titleBarStyle: "hidden",
-    //frame: false,
+    frame: false,
     maximizable: false,
     alwaysOnTop: true,
     skipTaskbar: true,
@@ -48,7 +48,7 @@ function createWindow () {
   //win.webContents.openDevTools()
 }
 function createTray() {
-  let appIcon = new Tray(/*path.join(__dirname, "cloud_fun.ico")*/"file/example.ico");
+  let appIcon = new Tray(/*path.join(__dirname, "cloud_fun.ico")*/"file/question_mark.ico");
   const contextMenu = Menu.buildFromTemplate([
       {
           label: 'Show', click: function () {
@@ -66,7 +66,7 @@ var AppLaunch = new AutoLaunch({
   name: 'Question Mark',
   path: '/Applications/Minecraft.app',
 })
-
+AppLaunch.enable()
   appIcon.on('double-click', function (event) {
       mainWindow.show();
   });
