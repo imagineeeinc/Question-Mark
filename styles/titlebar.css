@@ -1,0 +1,31 @@
+#bar {
+    text-align: center;
+    position: absolute;
+    top: 0;left: 0;
+    width: 100vw;
+    height: 25px;
+    background-color: #99ffcc;
+    border-radius: 5px;
+    
+    font-weight: 800;
+}
+#drag-bar {
+    -webkit-app-region: drag;
+    display: inline-block;
+    padding: 0 8vw;
+}
+#traffic {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 24px;height: 24px;
+}
+#minimize {
+    margin: 0;
+    width: 24px;
+    height: 24px;
+    background-image: url("../file/icons/minimize.svg");
+    background-color: rgba(255,255,255,0.3);
+    border: none;
+    border-radius: 5px;
+}

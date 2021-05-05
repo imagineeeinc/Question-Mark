@@ -4,14 +4,15 @@ const { BrowserWindow } = require('electron')
 const { ipcMain } = require('electron')
 const path = require("path")
 const AutoLaunch = require('auto-launch')
-let mainWindow
+var mainWindow
+var autoLaunch
 
 function createWindow () {
   const win = new BrowserWindow({
     //titleBarStyle: "hidden",
     frame: false,
     maximizable: false,
-    alwaysOnTop: true,
+    //alwaysOnTop: true,
     skipTaskbar: true,
     show: false,
     //backgroundColor: '#3b10e6',
@@ -23,6 +24,7 @@ function createWindow () {
     minimizable: true,
     minWidth: 470,
     minHeight: 260,
+    resizable: false,
     //defaultFontFamily: "monospace",
     webPreferences: {
       enableRemoteModule: true,
@@ -62,13 +64,6 @@ function createTray() {
           }
       }
   ]);
-  /*
-var AppLaunch = new AutoLaunch({
-  name: 'Question Mark',
-  path: '/Applications/Minecraft.app',
-})
-AppLaunch.enable()
-*/
   appIcon.on('double-click', function (event) {
       mainWindow.show();
   });
@@ -89,6 +84,13 @@ app.whenReady().then(() => {
   if (!simpleShort && !complexShort) {
     console.log('registration failed')
   }
+  autoLaunch = new AutoLaunch({
+    name: 'Your app name goes here',
+    path: app.getPath('exe'),
+  });
+  autoLaunch.isEnabled().then((isEnabled) => {
+    if (!isEnabled) autoLaunch.enable();
+  });
   mainWindow = createWindow()
   createTray()
 })
@@ -101,16 +103,6 @@ app.on('activate', () => {
 */
 app.setAboutPanelOptions({ applicationName: "Ouestion Mark"})
 
-const exeName = path.basename(process.execPath)
-app.setLoginItemSettings({
-  openAtLogin: true,
-  path: exeName,
-  args: [
-    '--processStart', `"${exeName}"`,
-    '--process-start-args', `"--hidden"`
-  ]
-})
-
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -119,6 +111,7 @@ app.on('window-all-closed', () => {
 })
 app.on('will-quit', () => {
   globalShortcut.unregisterAll()
+  autoLaunch.disable()
 })
 
 
