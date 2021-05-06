@@ -35,13 +35,11 @@ function createWindow () {
   let tray = null
   win.on('minimize', function (event) {
     event.preventDefault();
-    win.setSkipTaskbar(true);
     tray = createTray();
   });
 
   win.on('restore', function (event) {
     win.show();
-    win.setSkipTaskbar(false);
     tray.destroy();
   })
   win.loadFile('views/index.html')
@@ -50,15 +48,15 @@ function createWindow () {
   //win.webContents.openDevTools()
 }
 function createTray() {
-  let appIcon = new Tray(/*path.join(__dirname, "cloud_fun.ico")*/"file/question_mark.ico");
+  appIcon = new Tray(/*path.join(__dirname, "cloud_fun.ico")*/"file/questionmark.ico");
   const contextMenu = Menu.buildFromTemplate([
       {
-          label: 'Show', click: function () {
+          label: 'Open', click: function () {
               mainWindow.show();
           }
       },
       {
-          label: 'Exit', click: function () {
+          label: 'Shut Down App', click: function () {
               app.isQuiting = true;
               app.quit();
           }
@@ -85,7 +83,7 @@ app.whenReady().then(() => {
     console.log('registration failed')
   }
   autoLaunch = new AutoLaunch({
-    name: 'Your app name goes here',
+    name: 'Question Mark',
     path: app.getPath('exe'),
   });
   autoLaunch.isEnabled().then((isEnabled) => {

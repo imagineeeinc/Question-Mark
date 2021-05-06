@@ -28,4 +28,11 @@
     background-color: rgba(255,255,255,0.3);
     border: none;
     border-radius: 5px;
+    transition-duration: .5s;
+}
+#minimize:hover {
+    background-color: rgba(255,255,255,0.6);
+}
+#minimize:active {
+    background-color: rgba(255,255,255,0.9);
 }

@@ -3,3 +3,7 @@ document.body.onkeydown = function(event) {
     //    event.preventDefault()
     //}
 }
+
+document.getElementById("minimize").onmouseup = function() {
+    win.minimize()
+}
