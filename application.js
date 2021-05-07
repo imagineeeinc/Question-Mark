@@ -6,6 +6,7 @@ const path = require("path")
 const AutoLaunch = require('auto-launch')
 var mainWindow
 var autoLaunch
+let firstClose = true
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -14,7 +15,7 @@ function createWindow () {
     maximizable: false,
     //alwaysOnTop: true,
     skipTaskbar: true,
-    show: false,
+    //show: false,
     //backgroundColor: '#3b10e6',
     transparent: true,
     fullscreenable: false,
@@ -34,8 +35,12 @@ function createWindow () {
   })
   let tray = null
   win.on('minimize', function (event) {
-    event.preventDefault();
-    tray = createTray();
+    if (firstClose === false) {
+      event.preventDefault();
+      tray = createTray();
+    } else if (firstClose === true) {
+      firstClose = false
+    }
   });
 
   win.on('restore', function (event) {
@@ -90,6 +95,7 @@ app.whenReady().then(() => {
     if (!isEnabled) autoLaunch.enable();
   });
   mainWindow = createWindow()
+  mainWindow.minimize()
   createTray()
 })
 /*
